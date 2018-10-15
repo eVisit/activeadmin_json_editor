@@ -2,6 +2,7 @@
 
 "json_input" and "jsonb_input" field type to active_admin that allow to edit Postgresql json and jsonb values as json tree.
 Data shown by using jsoneditor.js from http://jsoneditoronline.org
+
 This version lets you set any of the options that jsoneditor supports via the :editor_options argument (see example below).
 
 ## Installation
