@@ -2,7 +2,7 @@
  * jsoneditor.js
  *
  * @brief
- * JSONEditor is a web-based tool to view, edit, and format JSON.
+ * JSONEditorLegacy is a web-based tool to view, edit, and format JSON.
  * It shows data a clear, editable treeview.
  *
  * Supported browsers: Chrome, Firefox, Safari, Opera, Internet Explorer 8+
@@ -32,9 +32,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define(factory);
 	else if(typeof exports === 'object')
-		exports["JSONEditor"] = factory();
+		exports["JSONEditorLegacy"] = factory();
 	else
-		root["JSONEditor"] = factory();
+		root["JSONEditorLegacy"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/
@@ -86,7 +86,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1), __webpack_require__(2), __webpack_require__(3)], __WEBPACK_AMD_DEFINE_RESULT__ = (function (treemode, textmode, util) {
 
 	  /**
-	   * @constructor JSONEditor
+	   * @constructor JSONEditorLegacy
 	   * @param {Element} container    Container element
 	   * @param {Object}  [options]    Object with options. available options:
 	   *                               {String} mode      Editor mode. Available values:
@@ -111,9 +111,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *                                                      modes 'text' and 'code'
 	   * @param {Object | undefined} json JSON object
 	   */
-	  function JSONEditor (container, options, json) {
-	    if (!(this instanceof JSONEditor)) {
-	      throw new Error('JSONEditor constructor called without "new".');
+	  function JSONEditorLegacy (container, options, json) {
+	    if (!(this instanceof JSONEditorLegacy)) {
+	      throw new Error('JSONEditorLegacy constructor called without "new".');
 	    }
 
 	    // check for unsupported browser (IE8 and older)
@@ -143,16 +143,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @type { Object.<String, {mixin: Object, data: String} > }
 	   */
-	  JSONEditor.modes = {};
+	  JSONEditorLegacy.modes = {};
 
 	  /**
-	   * Create the JSONEditor
+	   * Create the JSONEditorLegacy
 	   * @param {Element} container    Container element
 	   * @param {Object}  [options]    See description in constructor
 	   * @param {Object | undefined} json JSON object
 	   * @private
 	   */
-	  JSONEditor.prototype._create = function (container, options, json) {
+	  JSONEditorLegacy.prototype._create = function (container, options, json) {
 	    this.container = container;
 	    this.options = options || {};
 	    this.json = json || {};
@@ -165,13 +165,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Detach the editor from the DOM
 	   * @private
 	   */
-	  JSONEditor.prototype._delete = function () {};
+	  JSONEditorLegacy.prototype._delete = function () {};
 
 	  /**
 	   * Set JSON object in editor
 	   * @param {Object | undefined} json      JSON data
 	   */
-	  JSONEditor.prototype.set = function (json) {
+	  JSONEditorLegacy.prototype.set = function (json) {
 	    this.json = json;
 	  };
 
@@ -179,7 +179,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Get JSON from the editor
 	   * @returns {Object} json
 	   */
-	  JSONEditor.prototype.get = function () {
+	  JSONEditorLegacy.prototype.get = function () {
 	    return this.json;
 	  };
 
@@ -187,7 +187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Set string containing JSON for the editor
 	   * @param {String | undefined} jsonText
 	   */
-	  JSONEditor.prototype.setText = function (jsonText) {
+	  JSONEditorLegacy.prototype.setText = function (jsonText) {
 	    this.json = util.parse(jsonText);
 	  };
 
@@ -195,7 +195,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Get stringified JSON contents from the editor
 	   * @returns {String} jsonText
 	   */
-	  JSONEditor.prototype.getText = function () {
+	  JSONEditorLegacy.prototype.getText = function () {
 	    return JSON.stringify(this.json);
 	  };
 
@@ -203,7 +203,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Set a field name for the root node.
 	   * @param {String | undefined} name
 	   */
-	  JSONEditor.prototype.setName = function (name) {
+	  JSONEditorLegacy.prototype.setName = function (name) {
 	    if (!this.options) {
 	      this.options = {};
 	    }
@@ -214,24 +214,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Get the field name for the root node.
 	   * @return {String | undefined} name
 	   */
-	  JSONEditor.prototype.getName = function () {
+	  JSONEditorLegacy.prototype.getName = function () {
 	    return this.options && this.options.name;
 	  };
 
 	  /**
 	   * Change the mode of the editor.
-	   * JSONEditor will be extended with all methods needed for the chosen mode.
+	   * JSONEditorLegacy will be extended with all methods needed for the chosen mode.
 	   * @param {String} mode     Available modes: 'tree' (default), 'view', 'form',
 	   *                          'text', and 'code'.
 	   */
-	  JSONEditor.prototype.setMode = function (mode) {
+	  JSONEditorLegacy.prototype.setMode = function (mode) {
 	    var container = this.container,
 	        options = util.extend({}, this.options),
 	        data,
 	        name;
 
 	    options.mode = mode;
-	    var config = JSONEditor.modes[mode];
+	    var config = JSONEditorLegacy.modes[mode];
 	    if (config) {
 	      try {
 	        var asText = (config.data == 'text');
@@ -268,10 +268,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param {Error} err
 	   * @private
 	   */
-	  JSONEditor.prototype._onError = function(err) {
+	  JSONEditorLegacy.prototype._onError = function(err) {
 	    // TODO: onError is deprecated since version 2.2.0. cleanup some day
 	    if (typeof this.onError === 'function') {
-	      util.log('WARNING: JSONEditor.onError is deprecated. ' +
+	      util.log('WARNING: JSONEditorLegacy.onError is deprecated. ' +
 	          'Use options.error instead.');
 	      this.onError(err);
 	    }
@@ -291,11 +291,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * - `mode: String`           The name of the mode.
 	   * - `mixin: Object`          An object containing the mixin functions which
-	   *                            will be added to the JSONEditor. Must contain functions
+	   *                            will be added to the JSONEditorLegacy. Must contain functions
 	   *                            create, get, getText, set, and setText. May have
 	   *                            additional functions.
-	   *                            When the JSONEditor switches to a mixin, all mixin
-	   *                            functions are added to the JSONEditor, and then
+	   *                            When the JSONEditorLegacy switches to a mixin, all mixin
+	   *                            functions are added to the JSONEditorLegacy, and then
 	   *                            the function `create(container, options)` is executed.
 	   * - `data: 'text' | 'json'`  The type of data that will be used to load the mixin.
 	   * - `[load: function]`       An optional function called after the mixin
@@ -303,13 +303,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	   *
 	   * @param {Object | Array} mode  A mode object or an array with multiple mode objects.
 	   */
-	  JSONEditor.registerMode = function (mode) {
+	  JSONEditorLegacy.registerMode = function (mode) {
 	    var i, prop;
 
 	    if (util.isArray(mode)) {
 	      // multiple modes
 	      for (i = 0; i < mode.length; i++) {
-	        JSONEditor.registerMode(mode[i]);
+	        JSONEditorLegacy.registerMode(mode[i]);
 	      }
 	    }
 	    else {
@@ -318,7 +318,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!('mixin' in mode)) throw new Error('Property "mixin" missing');
 	      if (!('data' in mode)) throw new Error('Property "data" missing');
 	      var name = mode.mode;
-	      if (name in JSONEditor.modes) {
+	      if (name in JSONEditorLegacy.modes) {
 	        throw new Error('Mode "' + name + '" already registered');
 	      }
 
@@ -334,15 +334,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      }
 
-	      JSONEditor.modes[name] = mode;
+	      JSONEditorLegacy.modes[name] = mode;
 	    }
 	  };
 
 	  // register tree and text modes
-	  JSONEditor.registerMode(treemode);
-	  JSONEditor.registerMode(textmode);
+	  JSONEditorLegacy.registerMode(treemode);
+	  JSONEditorLegacy.registerMode(textmode);
 
-	  return JSONEditor;
+	  return JSONEditorLegacy;
 	}.apply(null, __WEBPACK_AMD_DEFINE_ARRAY__)), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 
 /***/ },
@@ -1255,7 +1255,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  textmode._onError = function(err) {
 	    // TODO: onError is deprecated since version 2.2.0. cleanup some day
 	    if (typeof this.onError === 'function') {
-	      util.log('WARNING: JSONEditor.onError is deprecated. ' +
+	      util.log('WARNING: JSONEditorLegacy.onError is deprecated. ' +
 	          'Use options.error instead.');
 	      this.onError(err);
 	    }
@@ -1961,7 +1961,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constructor History
 	   * Store action history, enables undo and redo
-	   * @param {JSONEditor} editor
+	   * @param {JSONEditorLegacy} editor
 	   */
 	  function History (editor) {
 	    this.editor = editor;
@@ -2190,7 +2190,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constructor SearchBox
 	   * Create a search box in given HTML container
-	   * @param {JSONEditor} editor    The JSON Editor to attach to
+	   * @param {JSONEditorLegacy} editor    The JSON Editor to attach to
 	   * @param {Element} container               HTML container element of where to
 	   *                                          create the search box
 	   */

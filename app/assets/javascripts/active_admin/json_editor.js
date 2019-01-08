@@ -39,7 +39,7 @@
       Object.assign(options, optionsOverride);
       options['mode'] = options['modes'][0];
 
-      editor = new JSONEditor(container, options,JSON.parse(textarea.val()));
+      editor = new JSONEditorLegacy(container, options,JSON.parse(textarea.val()));
     });
   });
 })(window, jQuery);
